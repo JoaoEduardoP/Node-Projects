@@ -1,0 +1,11 @@
+-------------------------------------------------
+Comandos para versionamento do node:
+
+* node --version
+
+* nvm install latest
+
+* nvm current
+
+* nvm use [version]
+-------------------------------------------------
