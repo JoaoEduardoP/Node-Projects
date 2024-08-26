@@ -1,0 +1,25 @@
+-------------------------------------------------
+Comandos para versionamento do node:
+
+* node --version
+
+* nvm install latest
+
+* nvm current
+
+* nvm use [version]
+-------------------------------------------------
+Comandos para uso do ´eslint´
+
+npx eslint --init
+
+import * as Logger from "./logger.js";
+
+import * as Path from "path";
+
+export * from "./logger.js";
+
+// eslint-disable-next-line no-undef 
+
+/* eslint-disable no-unused-vars */
+-------------------------------------------------
