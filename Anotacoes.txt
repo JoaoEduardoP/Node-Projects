@@ -23,3 +23,25 @@ export * from "./logger.js";
 
 /* eslint-disable no-unused-vars */
 -------------------------------------------------
+Comandos para uso no ´npm´
+
+npm-check_updates
+
+ncu -u
+
+npm outdated (or) npm -g outdated (para dependencias globais) 
+
+npm list
+-------------------------------------------------
+Comando para publicar dependencias no ´npm´
+
+npm init --yes (em um projeto limpo, para criar o "package.json")
+
+npm login (logar na conta npm)
+
+npm publish
+
+* Caso publicado, instale a dependencia em outro projeto (npm install "x") e faça o import aonde desejar utilizar (import * as X from "x";)
+
+npm version major (ou "minor", ou "patch" dependendo das alterações) (para alterar a versão, e logo após dar um "npm publish")
+-------------------------------------------------
