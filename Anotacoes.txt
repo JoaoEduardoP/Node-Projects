@@ -1,4 +1,16 @@
 -------------------------------------------------
+Anotações:
+
+* Operações CRUD (Create, Read, Update e Delete)
+
+* Http Requests:
+    
+    * GET    - Pegar Dados.
+    * POST   - Enviar Dados.
+    * PUT    - Update em Dados.
+    * DELETE - Deletar Dados.
+
+-------------------------------------------------
 Comandos para versionamento do node:
 
 * node --version
@@ -11,37 +23,37 @@ Comandos para versionamento do node:
 -------------------------------------------------
 Comandos para uso do ´eslint´
 
-npx eslint --init
+* npx eslint --init
 
-import * as Logger from "./logger.js";
+* import * as Logger from "./logger.js";
 
-import * as Path from "path";
+* import * as Path from "path";
 
-export * from "./logger.js";
+* export * from "./logger.js";
 
-// eslint-disable-next-line no-undef 
+* // eslint-disable-next-line no-undef 
 
-/* eslint-disable no-unused-vars */
+* /* eslint-disable no-unused-vars */
 -------------------------------------------------
 Comandos para uso no ´npm´
 
-npm-check_updates
+* npm-check_updates
 
-ncu -u
+* ncu -u
 
-npm outdated (or) npm -g outdated (para dependencias globais) 
+* npm outdated (or) npm -g outdated (para dependencias globais) 
 
-npm list
+* npm list
 -------------------------------------------------
 Comando para publicar dependencias no ´npm´
 
-npm init --yes (em um projeto limpo, para criar o "package.json")
+* npm init --yes (em um projeto limpo, para criar o "package.json")
 
-npm login (logar na conta npm)
+* npm login (logar na conta npm)
 
-npm publish
+* npm publish
 
 * Caso publicado, instale a dependencia em outro projeto (npm install "x") e faça o import aonde desejar utilizar (import * as X from "x";)
 
-npm version major (ou "minor", ou "patch" dependendo das alterações) (para alterar a versão, e logo após dar um "npm publish")
+* npm version major (ou "minor", ou "patch" dependendo das alterações) (para alterar a versão, e logo após dar um "npm publish")
 -------------------------------------------------
