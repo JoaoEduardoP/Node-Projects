@@ -57,3 +57,14 @@ Comando para publicar dependencias no ´npm´
 
 * npm version major (ou "minor", ou "patch" dependendo das alterações) (para alterar a versão, e logo após dar um "npm publish")
 -------------------------------------------------
+Setar o ambiente de debugação para Produção ou Desevolvimento
+
+* $env:NODE_ENV="development" (ou "production")
+
+* $env:app_password=1234  (Setando uma variável de ambiente)
+
+* $env:DEBUG = "app:startup" (usando dependencia "DEBUG")
+
+* $env:DEBUG = 'app:startup','app:db'(para mais de um módulo de debugação) ou $env:DEBUG = 'app:*' (para todos)
+
+-------------------------------------------------

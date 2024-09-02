@@ -1,0 +1,6 @@
+{
+    "name": "Curso - Production",
+    "mail":{
+        "host": "Prod - CursoMailHost"
+    } 
+}
