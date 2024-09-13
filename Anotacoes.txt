@@ -68,3 +68,10 @@ Setar o ambiente de debugação para Produção ou Desevolvimento
 * $env:DEBUG = 'app:startup','app:db'(para mais de um módulo de debugação) ou $env:DEBUG = 'app:*' (para todos)
 
 -------------------------------------------------
+Configurar e utilizar o mongodb como banco de dados
+
+* copiar o caminho do diretório (Ex: C:\Program Files\MongoDB\Server\7.0\bin) para as vaiáveis de ambiente PATH
+
+* mongod (Informar no prompt de comando para iniciar o banco de dados do mongodb)
+
+-------------------------------------------------

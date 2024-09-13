@@ -11,11 +11,13 @@ import homepage from './routes/homepage.js';
 const aplicacao = express();
 const porta = process.env.PORT || 3000;
 const debugging = debug('aplicacao:startup');
+const dbDebugging = debug('aplicacao:db');
 
 // Configuração de ambiente
 console.log(`Aplicação: ${config.get('name')}`);
 console.log(`Mail: ${config.get('mail.host')}`);
 console.log(`Senha da Aplicação: ${config.get('mail.password')}`);
+console.log(`Ambiente: ${aplicacao.get('env')}`);
 
 aplicacao.set('view engine', 'pug');
 aplicacao.set('views', './views');
@@ -31,6 +33,8 @@ aplicacao.use(express.static('../public'));
 aplicacao.use(helmet());
 aplicacao.use(logger.logging);
 aplicacao.use(autenticating.autenticating);
+
+dbDebugging("Banco de dados habilitado...");
 
 // Definindo rotas para a view de cursos
 aplicacao.use('/api/courses', router);
