@@ -1,7 +1,29 @@
 import Joi from 'joi';
 import express from 'express';
+import mongoose from 'mongoose';
+import debug from 'debug';
 
 const router = express.Router();
+const debugging = debug('aplicacao:database')
+
+const DataBase = mongoose.connect('mongodb://localhost/curso')
+    .then( () => debugging('Conectado ao Banco de Dados'))
+    .catch( () => debugging('Erro ao Conectar ao Banco de Dados'))
+
+const schema = new mongoose.Schema({
+    id: {
+        type: Number,
+        required: true
+    },
+    name: {
+        type: String,
+        required: true,
+        min: 5,
+        max: 100
+    }
+});
+    
+const generos = mongoose.model('generos',schema);
 
 var genders = [
     { id: 1, name: 'Ação' },
@@ -10,12 +32,24 @@ var genders = [
 ];
 
 router.get('/', (req, res) => {
-    res.send(genders);    
+    var each;
+    try{
+        if(!DataBase){
+            throw new Error('Sem conexão com o banco de dados');
+        }
+        res.send(getGender());
+    }
+    catch(err){
+        for(each in err.errors){
+            debugging(err.errors[each].message)
+        }
+        res.status(404).send('Sem conexão com o banco de dados');
+    }
 });
 
 router.get('/:id', (req, res) => {
-    const gender = genders.find( g => g.id === parseInt(req.params.id));
-
+    const gender = getGenderbyId(req.params.id)
+    
     if(!gender){
         res.status(404).send('O gênero com o ID informado não foi encontrado.');
         return;
@@ -34,13 +68,14 @@ router.post('/', (req, res) => {
         return;
     }
 
-    const genderPost = {
-        id: genders.length + 1,
-        name: req.body.name
-    }
+    const retorno = insertGender(req.body.name);
 
-    genders.push(genderPost);
-    res.status(201).send(genderPost);
+    if(retorno) {
+        res.status(201).send(genderPost);
+    }
+    else{
+        res.status(404).send('Não foi possível fazer a requisição POST no banco de dados.');
+    }
 });
 
 router.put('/:id', (req, res) => {
@@ -63,8 +98,8 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-    const gender = genders.find( g => g.id === parseInt(req.params.id));
-
+    const gender = getGenderbyId(req.params.id);
+    
     if(!gender){
         res.status(404).send('O gênero com o ID informado não foi encontrado.');
         return;
@@ -84,4 +119,34 @@ function validaGender(Gender){
     })
 
     return schema.validate(Gender)
+}
+
+async function getGender(){
+    const generosGet = await generos
+    .find()
+    return generosGet;
+}
+
+async function getGenderbyId(idGender){
+    const generoGet = await generos
+    .find({
+        id: idGender
+    })
+    return generoGet;
+}
+
+async function insertGender(nome){
+    var cada;
+    const Gen = new generos({
+        name: nome
+    });
+
+    try {
+        return await Gen.save();
+    }
+    catch(err){
+        for(each in err.errors){
+            debugging(err.erros[each].message);
+        }
+    }
 }

@@ -67,11 +67,30 @@ Setar o ambiente de debugação para Produção ou Desevolvimento
 
 * $env:DEBUG = 'app:startup','app:db'(para mais de um módulo de debugação) ou $env:DEBUG = 'app:*' (para todos)
 
+-- Linux --
+
+* Ao invés de "$env:", use "export"
+
+-------------------------------------------------
+Usos do Express
+
+* aplicacao.use(express.static('../public')); (usado para que os arquivos na pasta "./public" possam ser acessados (Ex:http://127.0.0.1:3000/readme.txt))
+
+* aplicacao.set('view engine', 'pug');
+  aplicacao.set('views', './views'); (Usando estas 2 linhas, toda função 'res.sender:' irá passar nos parâmetros o nome do arquivo na pasta 'view').
+
+* res.render('index', {title: "Meu App", message: "Olá"}); (Exemplo do tópico acima)
 -------------------------------------------------
 Configurar e utilizar o mongodb como banco de dados
 
 * copiar o caminho do diretório (Ex: C:\Program Files\MongoDB\Server\7.0\bin) para as vaiáveis de ambiente PATH
 
 * mongod (Informar no prompt de comando para iniciar o banco de dados do mongodb)
+
+-- Linux --
+
+* sudo service mongod start
+
+* mongosh
 
 -------------------------------------------------

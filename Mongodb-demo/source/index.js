@@ -5,28 +5,68 @@ const connect = mongoose.connect('mongodb://localhost/aplicacao')   // 'aplicaca
     .catch(err => console.error('Could not connect to MongoDB...', err));
 
 const schema = new mongoose.Schema({
-    name: String,
-    author: String,
-    tags: [ String ],
-    value: Number,
+    name: { 
+        type: String, 
+        required: true,
+        minlenght: 255,
+        //match: /pattern/
+    },
+    category: {
+        type: String,
+        required: true,
+        enum: ['web','mobile','network'],
+        lowercase: true
+    },
+    author:  { type: String, required: true},
+    tags: {
+        type: Array,
+        validate: {
+            validator: function(v) {
+                const promise = new Promise( (resolve, reject) => {
+                    setTimeout(() => {
+                        const result = v && v.length > 0;
+                        resolve(result);
+                    },4000);
+                })
+                return promise;
+            },
+            message: 'Um curso, deve ter ao menos uma tag'
+        }
+    },
+    price: {
+        type: Number,
+        required: function(){ return this.isPublished},
+        min: 10,
+        max: 200,
+        get: v => Math.round(v),
+        set: v => Math.round(v)
+    },
     date: { type: Date, default: Date.now },
     isPublished: Boolean
 });                                                                 // Schema é a estrutura do documento
 
 const Curso = mongoose.model('cursos', schema);                     // 'cursos' é o nome da coleção
 
-async function criaCurso(nome, autor, tagsCurso, valor, publicado) {
+async function criaCurso(nome, categoria, autor, tagsCurso, valor, publicado) {
+    var each;
     const curso = new Curso({
         name: nome,
+        category: categoria,
         author: autor,
         tags: tagsCurso,
         price: valor,
         isPublished: publicado
     });
     
-    const result = await curso.save();
-    
-    console.log(result);
+    try {
+        const result = await curso.save();
+        console.log(result);
+    }
+    catch(e){
+        for(each in e.errors){
+            console.log(e.errors[each].message)
+        }
+    }
 }
 
 async function listaCurso(){
@@ -113,11 +153,11 @@ async function DeletaCurso(id){
 
 /* Preenchendo a lista de todos os cursos */
 
-// criaCurso('Node.js Course', 'João Eduardo', ['node', 'backend'], true);
+// criaCurso('Node.js Course', 'network', 'João Eduardo', ['node', 'backend'],20.5, true);
 
-// criaCurso('Teste - 1', 'João Eduardo - 1', ['C#', 'C'], true);
+// criaCurso('Teste - 1', 'web', 'João Eduardo - 1', ['C#', 'C'], true);
 
-// criaCurso('Teste - 2', 'João Eduardo - 2', ['Java', 'JavaScript'], true);
+// criaCurso('Teste - 2', 'mobile', 'João Eduardo - 2', ['frontend', 'react'], true);
 
 // atualizaCurso('66e219916d3ca6c0e62bd09a', 'João Eduardo -1', true, 20); // Atualiza o curso com o id passado
 
