@@ -1,6 +1,12 @@
 -------------------------------------------------
 Anotações:
 
+* Para executar o programa e setar as variáveis de ambiente:
+  $env:DEBUG="aplicacao:*" 
+  $env:NODE_ENV="development"
+  $env:curso_password=1234 
+
+-------------------------------------------------
 * Operações CRUD (Create, Read, Update e Delete)
 
 * Http Requests:
@@ -80,12 +86,15 @@ Usos do Express
   aplicacao.set('views', './views'); (Usando estas 2 linhas, toda função 'res.sender:' irá passar nos parâmetros o nome do arquivo na pasta 'view').
 
 * res.render('index', {title: "Meu App", message: "Olá"}); (Exemplo do tópico acima)
+
 -------------------------------------------------
 Configurar e utilizar o mongodb como banco de dados
 
 * copiar o caminho do diretório (Ex: C:\Program Files\MongoDB\Server\7.0\bin) para as vaiáveis de ambiente PATH
 
 * mongod (Informar no prompt de comando para iniciar o banco de dados do mongodb)
+
+* net stop/start MongoDB (Parar/iniciar ele no Windows)
 
 -- Linux --
 

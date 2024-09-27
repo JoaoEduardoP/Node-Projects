@@ -1,5 +1,6 @@
 import home from './routes/home.js'
 import gender from './routes/gender.js'
+import customer from './routes/customer.js'
 import * as logger from './middlewares/logger.js'
 import * as autenticator from './middlewares/autenticator.js'
 import express from 'express';
@@ -40,6 +41,9 @@ aplicacao.use('/', home);
 
 // Definindo rota para os gêneros
 aplicacao.use('/api/genders', gender)
+
+// Definindo rota para os usuarios
+aplicacao.use('/api/customers', customer)
 
 aplicacao.listen(porta, () => {
     console.log(`Aplicação rodando na porta ${porta}...`);

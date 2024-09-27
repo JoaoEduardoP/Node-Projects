@@ -63,7 +63,7 @@ console.log('After');
 // Assync SETTLED prog - With Promisses
 //-----------------------------------------------------------------------------------------------------
 
-/*
+
 console.log('Before');
 
 promisseGetUser(1)
@@ -71,11 +71,11 @@ promisseGetUser(1)
     promisseGetRepositories(user.gitHubUsername)))
         .then(repos => (console.log('Repos:', repos,"\n-------------------------------------------------"),
         promisseGetCommits(repos[0])))
-            .then(commits => console.log('Commits:', commits,"\n-------------------------------------------------")),
+            .then(commits => console.log('Commits:', commits,"\n-------------------------------------------------"))
             .catch(err => console.log('Error:\n', err.message));
 
 console.log('After');
-*/
+
 
 //-----------------------------------------------------------------------------------------------------
 // Assync PARALLEL prog - With Promisses (Desta forma, não é possível pegar o resultado de uma promessa e usar em outra, pois as promessas são executadas em paralelo)
